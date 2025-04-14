@@ -1,0 +1,17 @@
+{
+    "name": "PWA Sizer",
+    "short_name": "PWASIZE",
+    "description": "Progressive Web App Browser Sizer",
+    "scope": "/pwa_size/",
+    "start_url": "/pwa_size/",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "display": "standalone", 
+    "icons": [
+        {
+          "src": "/pwa_size/img/icon.svg",
+          "type": "image/svg",
+          "sizes": "512x512"
+        }
+    ]
+  }
