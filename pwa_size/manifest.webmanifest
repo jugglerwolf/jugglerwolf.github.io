@@ -6,7 +6,7 @@
     "start_url": "/pwa_size/",
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
-    "display": "standalone", 
+    "display": "fullscreen", 
     "icons": [
         {
           "src": "/pwa_size/img/icon.png",
