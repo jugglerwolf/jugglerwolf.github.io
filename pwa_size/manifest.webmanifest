@@ -9,8 +9,8 @@
     "display": "standalone", 
     "icons": [
         {
-          "src": "/pwa_size/img/icon.svg",
-          "type": "image/svg",
+          "src": "/pwa_size/img/icon.png",
+          "type": "image/png",
           "sizes": "512x512"
         }
     ]

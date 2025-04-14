@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub page as PWA template</title>
+  <link rel="canonical" href="https://jugglerwolf.github.io/pwa_size/" />
+  <link rel="manifest" href="/pwa_size/manifest.webmanifest">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+ 
+    <div id="root">
+
+        <div id="input">
+            <input type="text" name="textinput" id="textinput">
+            <input type="button" value="Save to History" id="saveInput">
+        </div>
+        <div id="historyoutput"></div>
+    
+        <br/><br/>
+        <br/><br/>
+         <!-- Trigger/Open The Modal -->
+        <button id="historybtn">Open History</button>
+    
+        <!-- The Modal -->
+        <div id="history-modal" class="modal">
+    
+            <!-- Modal content -->
+            <div id="history-modal-content" class="modal-content">
+                <div class="modal-content-title">
+                    <div class="modal-content-title-text">History</div>
+                    <div class="close">&times;</div>
+                </div>
+                <div id="history-modal-text" class="modal-content-text">
+                    <div class="nohistory">No history...</div>
+                </div>
+            </div>
+    
+        </div> 
+
+
+        <div id="size-display"></div>
+
+    </div>
+
+
+  <script>
+    if (navigator.serviceWorker) {
+    navigator.serviceWorker.register (
+        '/pwa_size/sw.js',
+        {scope: '/pwa_size/'}
+    )
+    }
+
+
+
+
+
+
+      
+    let history = [];
+
+    function saveInput(){
+        var inputvalue = document.getElementById('textinput').value;
+
+        var historyItem = {
+            "datetime": new Date(),
+            "inputvalue": inputvalue
+        };
+
+        console.log(historyItem);
+        history.push(historyItem)
+        
+        console.log(history);
+    }
+
+
+    document.getElementById("saveInput").onclick = function() {
+        saveInput();
+    };
+
+
+    function updateHistoryList(){
+        let historyListElement = document.getElementById('history-modal-text');
+
+        if (history.length > 0){
+            historyListElement.innerHTML = "";
+            for (let i = history.length - 1; i >= 0; i--) {
+                let newElement = document.createElement('div');
+                newElement.className = 'history-list-item';
+
+                currdatetime = history[i]["datetime"].toLocaleTimeString();
+                currinputvalue = history[i]["inputvalue"];
+
+                newElement.innerHTML = `<span class='history-datetime'>${currdatetime}</span> - <span class='history-inputvalue'>${currinputvalue}</span>`;
+                
+                historyListElement.appendChild(newElement);
+            }
+        }
+    }
+
+
+    // Get the modal
+    var historymodal = document.getElementById("history-modal");
+
+    // Get the button that opens the modal
+    var historybtn = document.getElementById("historybtn");
+
+    // Get the <span> element that closes the modal
+    var closeicon = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    historybtn.onclick = function() {
+        updateHistoryList()
+        historymodal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    closeicon.onclick = function() {
+        historymodal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == historymodal) {
+            historymodal.style.display = "none";
+        }
+    } 
+
+    function displayWindowSize(){
+        let sizeElement = document.getElementById('size-display');
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        displayString = `Width x Height: <br/> ${width}px x ${height}px`
+        //console.log(displayString);
+
+        sizeElement.innerHTML = displayString;
+    }
+
+    window.addEventListener('resize', () => {
+        displayWindowSize();
+    });
+
+    displayWindowSize();
+  </script>
+  <script src="js/app.js"></script>
+</body>
+</html>
