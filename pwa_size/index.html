@@ -136,8 +136,11 @@
 
     function displayWindowSize(){
         let sizeElement = document.getElementById('size-display');
-        const width = window.innerWidth;
-        const height = window.innerHeight;
+        let measuredArea = document.getElementById('root');
+        // const width = window.innerWidth;
+        // const height = window.innerHeight;
+        const width = measuredArea.innerWidth;
+        const height = measuredArea.innerHeight;
 
         displayString = `Width x Height: <br/> ${width}px x ${height}px`
         //console.log(displayString);

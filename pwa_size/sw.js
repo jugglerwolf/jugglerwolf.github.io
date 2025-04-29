@@ -1,6 +1,6 @@
 var GHPATH = '/pwa_size';
 var APP_PREFIX = 'pwasize_';
-var VERSION = 'v_20250423.1';
+var VERSION = 'v_20250428.1';
 var URLS = [
   `${GHPATH}/`,
   `${GHPATH}/index.html`,
